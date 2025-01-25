@@ -98,6 +98,9 @@ app.post("/api/auth/login", async (req, res) => {
     if (!user) {
       return res.status(404).send({ error: "User not found" });
     }
+    if (user.password !== password) {
+      return res.status(401).send({ error: "Invalid password" });
+    }
 
     // // Compare the provided password with the stored hashed password
     // const isPasswordValid = await bcrypt.compare(password, user.password);
